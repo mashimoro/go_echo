@@ -35,6 +35,7 @@ type UserHandler struct {
 
 //ให้เชื่อมต่อฐานข้อมูลเมื่อ Initialize
 func (h *UserHandler) Initialize() {
+
 	db, err := gorm.Open("mysql", "root:root@tcp(localhost:3306)/godb?charset=utf8&parseTime=True")
 	if err != nil {
 		log.Fatal(err)
