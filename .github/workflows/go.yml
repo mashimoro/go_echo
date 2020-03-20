@@ -25,7 +25,7 @@ jobs:
       run: |
         export PATH=$PATH:$(go env GOPATH)/bin
         go get -u golang.org/x/lint/golint 
-        golint -set_exit_status github.com/up1/demo-go-actions/demo
+        golint -set_exit_status github.com/mashimoro/demo-go-actions/demo
         
     
     - name: Get dependencies
