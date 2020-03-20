@@ -28,6 +28,15 @@ jobs:
         go get -u golang.org/x/lint/golint 
         golint -set_exit_status github.com/up1/demo-go-actions/demo
         
+    
+    - name: Get dependencies
+      run: |
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi
+        
     - name: Run Unit tests.
       run: |
         go test -short -coverprofile cover.out -covermode=atomic ./...
@@ -39,13 +48,6 @@ jobs:
           token: ${{secrets.CODECOV_TOKEN}}
           file: ./coverage.txt
 
-    - name: Get dependencies
-      run: |
-        go get -v -t -d ./...
-        if [ -f Gopkg.toml ]; then
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-            dep ensure
-        fi
 
     - name: Build
       run: go build -v .
